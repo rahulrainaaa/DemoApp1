@@ -14,7 +14,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -24,7 +23,6 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, view: ViewGroup?, bundle: Bundle?): View? {
-//        FirebaseApp.initializeApp(requireContext())
         binding = FragmentLoginBinding.inflate(inflater, view, false)
         auth = FirebaseAuth.getInstance()
         return binding.root
@@ -57,21 +55,19 @@ class LoginFragment : Fragment() {
         val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, 111)
+        startActivityForResult(signInIntent, ActivityRequest.GOOGLE_LOGIN.code)
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == 111) {
+        if (requestCode == ActivityRequest.GOOGLE_LOGIN.code) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 firebaseAuthWithGoogle(account)
             } catch (e: ApiException) {
-                Toast.makeText(activity, "Google SignIn Failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Google SignIn Failed", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -79,17 +75,22 @@ class LoginFragment : Fragment() {
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
 
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-
         auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Snackbar.make(
                     binding.root,
-                    "Welcome: ${auth.currentUser}",
-                    Snackbar.LENGTH_INDEFINITE
+                    "Welcome: ${auth.currentUser?.displayName}",
+                    Snackbar.LENGTH_LONG
                 ).show()
+                findNavController().navigate(R.id.action_LoginFragment_to_DashboardFragment)
             } else {
-                Snackbar.make(binding.root, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Authentication Failed", Snackbar.LENGTH_LONG).show()
             }
         }
+    }
+
+    private enum class ActivityRequest(val code: Int) {
+        GOOGLE_LOGIN(1213),
+        FACEBOOK_LOGIN(4227)
     }
 }
