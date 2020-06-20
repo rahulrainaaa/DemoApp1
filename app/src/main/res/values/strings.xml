@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Demo App</string>
+
+    <string name="dashboard">Dashboard</string>
+    <string name="under_dev">Under Development</string>
+
+    <string name="username_email">User name / Email Address</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_out">Sign out</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="or">or</string>
+
+    <string name="google_client_id">529033869045-nls3pl5j2ognbo72ibcsraemfce4elnf.apps.googleusercontent.com</string>
+    <string name="google_client_secret">ErfBytn1NmD8_dM8EvLmncDk</string>
+
+</resources>
