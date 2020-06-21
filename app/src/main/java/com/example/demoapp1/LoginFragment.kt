@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.demoapp1.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -20,9 +21,11 @@ import com.google.firebase.auth.GoogleAuthProvider
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var viewModel: MainActivityViewModel
     private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(inflater: LayoutInflater, view: ViewGroup?, bundle: Bundle?): View? {
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         binding = FragmentLoginBinding.inflate(inflater, view, false)
         auth = FirebaseAuth.getInstance()
         return binding.root
@@ -32,13 +35,31 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnSignIn.setOnClickListener {
-            findNavController().navigate(R.id.action_LoginFragment_to_DashboardFragment)
+            var isValid = true
+
+            if (binding.etUserEmail.text.isNullOrBlank()) {
+                binding.etUserEmail.error = getString(R.string.cannot_blank)
+                isValid = false
+            } else binding.etUserEmail.error = null
+
+            if (binding.etPassword.text.isNullOrBlank()) {
+                binding.etPassword.error = getString(R.string.cannot_blank)
+                isValid = false
+            } else if (binding.etPassword.text?.length!! < 7) {
+                binding.etPassword.error = getString(R.string.password_too_short)
+                isValid = false
+            } else binding.etPassword.error = null
+
+            if (isValid) {
+                viewModel.userName = binding.etUserEmail.text?.trim().toString()
+                findNavController().navigate(R.id.action_LoginFragment_to_DashboardFragment)
+            }
         }
         binding.btnForgotPassword.setOnClickListener {
             Snackbar.make(binding.root, R.string.under_dev, Snackbar.LENGTH_SHORT).show()
         }
         binding.btnFb.setOnClickListener {
-            Snackbar.make(binding.root, "Use Facebook Profile", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, "Use Facebook Profile...", Snackbar.LENGTH_SHORT).show()
         }
         binding.btnGoogle.setOnClickListener {
             googleSignIn()

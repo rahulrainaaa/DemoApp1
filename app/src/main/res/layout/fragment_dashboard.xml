@@ -4,16 +4,216 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorDarkProfileBackground"
     tools:context=".DashboardFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_sign_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_out"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/title_top_margin"
+        android:background="@drawable/shape_profile_circle"
+        android:src="@drawable/img_face"
+        app:layout_constraintCircleRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_display_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/input_first_box_top_margin"
+        android:text="Display Name"
+        android:textColor="@android:color/white"
+        android:textFontWeight="@android:integer/config_longAnimTime"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_profile" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_user_name"
+        style="@style/TextAppearance.MaterialComponents.Overline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="domain.name"
+        android:textColor="@android:color/white"
+        android:textFontWeight="@integer/config_navAnimTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_display_name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_user_caption"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/input_start_margin"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/input_end_margin"
+        android:text="Share something about yourself here..."
+        android:textColor="@android:color/white"
+        android:textFontWeight="@integer/config_navAnimTime"
+        android:textIsSelectable="true"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_user_name" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_sign_out"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/sign_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_user_caption" />
+
+    <View
+        android:id="@+id/separator_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/input_first_box_top_margin"
+        android:background="@drawable/grad_horizontal_gray"
+        app:layout_constraintTop_toBottomOf="@id/btn_sign_out" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_pinterest"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/grad_vertical_primary"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_pinterest_56"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator_1" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_twitter"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/grad_vertical_primary"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_twitter__56"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_pinterest"
+        app:layout_constraintTop_toTopOf="@+id/btn_pinterest" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_facebook"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/grad_vertical_primary"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_fb_56"
+        app:layout_constraintEnd_toStartOf="@+id/btn_pinterest"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_pinterest" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_fb_total_followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10K"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_facebook"
+        app:layout_constraintStart_toStartOf="@+id/btn_facebook"
+        app:layout_constraintTop_toTopOf="@+id/txt_pinterest_total_followers" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_twitter_total_followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.3K"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_twitter"
+        app:layout_constraintStart_toStartOf="@+id/btn_twitter"
+        app:layout_constraintTop_toTopOf="@+id/txt_pinterest_total_followers" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txt_pinterest_total_followers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="5.3K"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_pinterest"
+        app:layout_constraintStart_toStartOf="@+id/btn_pinterest"
+        app:layout_constraintTop_toBottomOf="@+id/btn_pinterest" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label_followers_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="followers"
+        android:textColor="@color/colorVeryLightGray"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_fb_total_followers"
+        app:layout_constraintStart_toStartOf="@+id/txt_fb_total_followers"
+        app:layout_constraintTop_toTopOf="@+id/label_followers_center" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label_followers_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="followers"
+        android:textColor="@color/colorVeryLightGray"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_twitter_total_followers"
+        app:layout_constraintStart_toStartOf="@+id/txt_twitter_total_followers"
+        app:layout_constraintTop_toTopOf="@+id/label_followers_center" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/label_followers_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="followers"
+        android:textColor="@color/colorVeryLightGray"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@+id/txt_pinterest_total_followers"
+        app:layout_constraintStart_toStartOf="@+id/txt_pinterest_total_followers"
+        app:layout_constraintTop_toBottomOf="@+id/txt_pinterest_total_followers" />
+
+
+    <View
+        android:id="@+id/separator_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/grad_horizontal_gray"
+        app:layout_constraintBottom_toTopOf="@+id/materialTextView6"
+        app:layout_constraintTop_toBottomOf="@+id/label_followers_center"
+        app:layout_constraintVertical_bias="0.266"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Powered By:"
+        android:textColor="@color/colorVeryLightGray"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/img_logo_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_logo_code"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/footer_height"
+        android:src="@drawable/img_code_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

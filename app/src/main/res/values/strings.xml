@@ -3,6 +3,8 @@
 
     <string name="dashboard">Dashboard</string>
     <string name="under_dev">Under Development</string>
+    <string name="cannot_blank">Cannot be blank</string>
+    <string name="password_too_short">Password too short</string>
 
     <string name="username_email">User name / Email Address</string>
     <string name="password">Password</string>
